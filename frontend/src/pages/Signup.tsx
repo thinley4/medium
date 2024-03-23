@@ -3,11 +3,11 @@ import AuthForm from "../components/AuthForm";
 
 export default function(){
     return(
-        <div className="grid grid-cols-2">
+        <div className="lg:grid grid-cols-2">
             <div>
-                <AuthForm />
+                <AuthForm type="signup" />
             </div>
-            <div className="invisible md:visible">
+            <div className="hidden lg:block">
               <Quote />
             </div>
         </div>

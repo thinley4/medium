@@ -1,0 +1,1 @@
+export const BACKEND_URL= "https://backendb.thinleylama44.workers.dev";

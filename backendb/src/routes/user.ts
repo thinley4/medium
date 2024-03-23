@@ -23,9 +23,7 @@ userRouter.post('/signup', async(c) => {
       
       if(!success){
         c.status(411);
-        return c.json({
-          message: "Input not correct"
-        })
+        return c.text("Input not correct")
       }
   
       const user = await prisma.user.create({
@@ -46,7 +44,7 @@ userRouter.post('/signup', async(c) => {
       
       
       c.status(404);
-      return c.text("Error");
+      return c.text("Error")
     }
   })
   
@@ -60,9 +58,7 @@ userRouter.post('/signup', async(c) => {
       const {success} = signinInput.safeParse(body); //password minimum 6 letter
       if(!success){
         c.status(411);
-        return c.json({
-          message: "Input invalid"
-        })
+        return c.text("Input Invalid")
       }
       const user = await prisma.user.findUnique({
         where: {
@@ -73,7 +69,7 @@ userRouter.post('/signup', async(c) => {
 
       if(user == null){
         c.status(404);
-        return c.text("Invalid credential");
+        return c.text("Invalid credential")
       }
   
       const token = await sign({id: user.id}, c.env.JWT_SECRET);
@@ -82,6 +78,6 @@ userRouter.post('/signup', async(c) => {
       })
   
     } catch(e) {
-      return c.text("Invaild");
+      return c.text("Invalid");
     }
   })
