@@ -1,0 +1,4 @@
+
+[vars]
+DATABASE_URL="Url of prisma accelerate"
+JWT_SECRET="Your secret"

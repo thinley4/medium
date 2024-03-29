@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Appbar } from "../components/Appbar"
 import axios from "axios";
 import { BACKEND_URL } from "../config";
@@ -8,6 +8,19 @@ export const Publish = () => {
     const [title, setTitle]= useState("");
     const [content, setContent] = useState("");
     const navigate = useNavigate();
+
+    // useEffect( () => {
+
+    //     axios.get(`${BACKEND_URL}:3000/api/v1/blog`, {
+    //         headers: {
+    //             'Authorization': `${localStorage.getItem("token")}`
+    //         }
+    //     }).catch((e) => {
+    //         navigate("/");
+    //     })
+
+    // }, [])
+
     return (
         <div>
             <Appbar />
