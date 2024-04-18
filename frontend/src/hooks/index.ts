@@ -63,7 +63,7 @@ export const useCheck = () => {
             headers: {
                 Authorization: localStorage.getItem("token")
             }
-        }).catch((e) => {
+        }).catch(() => {
             setCurrStatus(false);
         })
     }, [])
