@@ -54,3 +54,21 @@ export const useBlogs = () => {
         blogs
     }
 }
+
+export const useCheck = () => {
+    const [currStatus, setCurrStatus] = useState(true);
+
+    useEffect(() => {
+        axios.get(`${BACKEND_URL}/api/v1/blog`, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        }).catch((e) => {
+            setCurrStatus(false);
+        })
+    }, [])
+
+    return {
+        currStatus
+    }
+}

@@ -1,27 +1,19 @@
-import { useEffect } from "react";
 import { Appbar } from "../components/Appbar"
 import { BlogCard } from "../components/BlogCard"
 import { BlogSkeleton } from "../components/BlogSkeleton";
-import { useBlogs } from "../hooks"
+import { useBlogs, useCheck } from "../hooks"
 import { useNavigate } from "react-router-dom"
-import axios from "axios";
-import { BACKEND_URL } from "../config";
 
 export const Blogs = () => {
     const navigate = useNavigate();
     const {loading, blogs} = useBlogs();
+    const {currStatus} = useCheck();
     const date = new Date().toLocaleDateString();
 
-    useEffect( () => {
-
-        axios.get(`${BACKEND_URL}/api/v1/blog`, {
-            headers: {
-                'Authorization': localStorage.getItem("token")
-            }
-        }).catch((e) => {
-            navigate("/");
-        })
-    })
+    // checking token
+    if(!currStatus) {
+        navigate('/');
+    }
 
     if(loading){
         return(

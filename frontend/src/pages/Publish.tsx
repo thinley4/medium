@@ -1,25 +1,20 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Appbar } from "../components/Appbar"
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
+import { useCheck } from "../hooks";
 
 export const Publish = () => {
     const [title, setTitle]= useState("");
     const [content, setContent] = useState("");
     const navigate = useNavigate();
+    const {currStatus} = useCheck();
 
-    useEffect( () => {
-
-        axios.get(`${BACKEND_URL}/api/v1/blog`, {
-            headers: {
-                'Authorization': localStorage.getItem("token")
-            }
-        }).catch((e) => {
-            navigate("/");
-        })
-
-    }, [])
+    // checking token
+    if(!currStatus) {
+        navigate('/');
+    }
 
     return (
         <div>
