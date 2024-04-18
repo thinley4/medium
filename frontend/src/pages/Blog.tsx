@@ -4,6 +4,9 @@ import FullBlog from "../components/FullBlog";
 import { BlogSkeleton } from "../components/BlogSkeleton";
 import { Appbar } from "../components/Appbar";
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 // atomFamilies/selector Families
 export default function(){
@@ -13,12 +16,17 @@ export default function(){
         id: id || ""
     });
     
-    if(!blog){
-        navigate("/");
-        return(
-            <div></div>
-        )
-    }
+    useEffect( () => {
+
+        axios.get(`${BACKEND_URL}/api/v1/blog`, {
+            headers: {
+                'Authorization': localStorage.getItem("token")
+            }
+        }).catch((e) => {
+            navigate("/");
+        })
+
+    }, [])
 
     if(loading) {
         return (

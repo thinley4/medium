@@ -19,18 +19,22 @@ blogRouter.use('/*', async(c, next)=> {
     const token = await c.req.header("authorization") || "";
     try {
         const user = await verify(token, c.env.JWT_SECRET)
+        console.log(user);
         
         if(user){
             c.set("userId", user.id);
             await next();
-        } else {
-            c.status(403);
-            return c.text("Not logged In")
-        }
+        } 
     }catch(e){
+        c.status(404);
         return c.text("Not logged")
     }
 });
+
+blogRouter.get('/', async(c, next)=> {
+    c.status(200);
+    return c.text("Verified");
+})
 
 blogRouter.post('/', async(c, next)=> {
     const prisma = new PrismaClient({

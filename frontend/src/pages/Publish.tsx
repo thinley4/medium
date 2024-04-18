@@ -9,17 +9,17 @@ export const Publish = () => {
     const [content, setContent] = useState("");
     const navigate = useNavigate();
 
-    // useEffect( () => {
+    useEffect( () => {
 
-    //     axios.get(`${BACKEND_URL}:3000/api/v1/blog`, {
-    //         headers: {
-    //             'Authorization': `${localStorage.getItem("token")}`
-    //         }
-    //     }).catch((e) => {
-    //         navigate("/");
-    //     })
+        axios.get(`${BACKEND_URL}/api/v1/blog`, {
+            headers: {
+                'Authorization': localStorage.getItem("token")
+            }
+        }).catch((e) => {
+            navigate("/");
+        })
 
-    // }, [])
+    }, [])
 
     return (
         <div>

@@ -3,6 +3,7 @@ import { Appbar } from "./Appbar";
 import { Avatar } from "./BlogCard";
 
 export default function({ blog }: {blog: Blog}){
+    const date = new Date().toLocaleDateString();
     return(
         <div>
             <Appbar />
@@ -12,7 +13,7 @@ export default function({ blog }: {blog: Blog}){
                         {blog.title}
                     </div>
                     <div className="text-slate-500 py-4">
-                        Posted on January 2, 2024
+                        {date}
                     </div>
                     <div className="text-slate-800">
                         {blog.content}
